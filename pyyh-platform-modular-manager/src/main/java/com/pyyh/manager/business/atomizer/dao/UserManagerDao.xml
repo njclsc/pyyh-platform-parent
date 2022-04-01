@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pyyh.manager.business.atomizer.dao.IUserManagerDao">
+	<insert id="add" parameterType = "com.pyyh.manager.business.atomizer.pojo.UserPojo" useGeneratedKeys = "true" keyProperty = "id">
+		insert into tb_user(account, password, mobilePhone, userName, email, organizationCode, post, status, creator, creatorOrganizationCode) values(
+			#{account}, #{password}, #{mobilePhone}, #{userName}, #{email}, #{organizationCode}, #{post}, 
+			${status}, #{creator}, #{creatorOrganizationCode}
+		)
+	</insert>
+	<select id="exists" parameterType = "com.pyyh.manager.business.atomizer.pojo.UserPojo" resultType = "Integer">
+		select exists (select 1 from tb_user where account = #{account} and organizationCode = #{organizationCode})
+	</select>
+	<delete id="delete" parameterType = "com.pyyh.manager.business.atomizer.pojo.UserPojo">
+		delete from tb_user where id = ${id}
+	</delete>
+	<update id="update" parameterType = "com.pyyh.manager.business.atomizer.pojo.UserPojo">
+		update tb_user set mobilePhone = #{mobilePhone}, userName = #{userName}, email = #{email}, 
+			post = #{post} where account = #{account} and organizationCode = #{organizationCode}
+	</update>
+	<select id="find" parameterType = "com.pyyh.manager.business.atomizer.pojo.UserPojo" resultType = "com.pyyh.manager.business.atomizer.pojo.UserPojo">
+		select * from tb_user where 1 = 1
+		<if test="id != null and id != ''">
+			and id = ${id}
+		</if>
+		<if test="account != null and account != ''">
+			and account = #{account}
+		</if>
+		<if test="mobilePhone != null and mobilePhone != ''">
+			and mobilePhone = #{mobilePhone}
+		</if>
+		<if test="userName != null and userName != ''">
+			and userName = #{userName}
+		</if>
+		<if test="email != null and email != ''">
+			and email = #{email}
+		</if>
+		<if test="organizationCode != null and organizationCode != ''">
+			and organizationCode = #{organizationCode}
+		</if>
+		<if test="post != null and post != ''">
+			and post = #{post}
+		</if>
+		<if test="status != null and status != ''">
+			and status = ${status}
+		</if>
+		<if test="creator != null and creator != ''">
+			and creator = #{creator}
+		</if>
+		<if test="creatorOrganizationCode != null and creatorOrganizationCode != ''">
+			and creatorOrganizationCode != #{creatorOrganizationCode}
+		</if>
+		<if test="rows != null and rows != ''">
+			limit ${begin}, ${rows}
+		</if>
+	</select>
+	<select id="count" parameterType = "com.pyyh.manager.business.atomizer.pojo.UserPojo" resultType = "Integer">
+		select count(*) from tb_user where 1 = 1
+		<if test="id != null and id != ''">
+			and id = ${id}
+		</if>
+		<if test="account != null and account != ''">
+			and account = #{account}
+		</if>
+		<if test="mobilePhone != null and mobilePhone != ''">
+			and mobilePhone = #{mobilePhone}
+		</if>
+		<if test="userName != null and userName != ''">
+			and userName = #{userName}
+		</if>
+		<if test="email != null and email != ''">
+			and email = #{email}
+		</if>
+		<if test="organizationCode != null and organizationCode != ''">
+			and organizationCode = #{organizationCode}
+		</if>
+		<if test="post != null and post != ''">
+			and post = #{post}
+		</if>
+		<if test="status != null and status != ''">
+			and status = ${status}
+		</if>
+		<if test="creator != null and creator != ''">
+			and creator = #{creator}
+		</if>
+		<if test="creatorOrganizationCode != null and creatorOrganizationCode != ''">
+			and creatorOrganizationCode != #{creatorOrganizationCode}
+		</if>
+	</select>
+</mapper>

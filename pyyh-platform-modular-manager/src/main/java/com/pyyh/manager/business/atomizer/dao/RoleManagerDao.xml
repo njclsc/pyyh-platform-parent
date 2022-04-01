@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pyyh.manager.business.atomizer.dao.IRoleManagerDao">
+	
+	<insert id="add" parameterType = "com.pyyh.manager.business.atomizer.pojo.RolePojo" useGeneratedKeys = "true" keyProperty = "id">
+		insert into tb_role(roleName, organizationCode, creator) values(#{roleName}, #{organizationCode}, #{creator})
+	</insert>
+	<select id="exists" parameterType = "com.pyyh.manager.business.atomizer.pojo.RolePojo" resultType = "Integer">
+		select exists(select 1 from tb_role where roleName = #{roleName} and organizationCode = #{organizationCode})
+	</select>
+	<delete id="delete" parameterType = "com.pyyh.manager.business.atomizer.pojo.RolePojo">
+		delete from tb_role where id = ${id}
+	</delete>
+	<update id="update" parameterType = "com.pyyh.manager.business.atomizer.pojo.RolePojo">
+		update tb_role set roleName = #{roleName} where id = ${id}
+	</update>
+	<select id="find" parameterType = "com.pyyh.manager.business.atomizer.pojo.RolePojo" resultType = "com.pyyh.manager.business.atomizer.pojo.RolePojo">
+		select * from tb_role where 1 = 1
+		<if test="id != null and id != ''">
+			and id = ${id}
+		</if>
+		<if test="roleName != null and roleName != ''">
+			and roleName = #{roleName}
+		</if>
+		<if test="organizationCode != null and organizationCode != ''">
+			and organizationCode = #{organizationCode}
+		</if>
+		<if test="creator != null and creator != ''">
+			and creator = #{creator}
+		</if>
+		<if test="rows != null and rows != ''">
+			limit ${begin}, ${rows}
+		</if>
+	</select>
+	<select id="count" parameterType = "com.pyyh.manager.business.atomizer.pojo.RolePojo" resultType = "Integer">
+		select count(*) from tb_role where 1 = 1
+		<if test="id != null and id != ''">
+			and id = ${id}
+		</if>
+		<if test="roleName != null and roleName != ''">
+			and roleName = #{roleName}
+		</if>
+		<if test="organizationCode != null and organizationCode != ''">
+			and organizationCode = #{organizationCode}
+		</if>
+		<if test="creator != null and creator != ''">
+			and creator = #{creator}
+		</if>
+	</select>
+</mapper>

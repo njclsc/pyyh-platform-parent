@@ -43,6 +43,7 @@ public class LoginServiceImp implements ILoginService{
 			
 			UserPojo _userPojo = loginDao.findUser(userPojo);
 			_userPojo.setLogin(true);
+			_userPojo.setPassword("");
 			jedis.set(key, JSONObject.toJSONString(_userPojo));
 			jedis.pexpire(key, ProjectConfig.getJWT_EXPIRES());
 			return JSONObject.toJSONString(ContainerUtil.response("/login/login/check", "登录成功", "success", jwtToken, null));

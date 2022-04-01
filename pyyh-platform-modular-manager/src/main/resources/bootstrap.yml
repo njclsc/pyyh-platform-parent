@@ -1,0 +1,24 @@
+server:
+  port: 9020
+  servlet:
+    context-path: /manager
+    
+spring:
+  application:
+    name: manager
+    
+  cloud:
+    nacos:
+      discovery:
+        namespace: 8c1fee1f-f656-4408-b368-16054632b931
+        server-addr: 192.168.4.122:7777
+      config:
+        namespace: 8c1fee1f-f656-4408-b368-16054632b931
+        server-addr: 192.168.4.122:7777
+        file-extension: yaml
+        shared-dataids: datasource-dev.yaml,redisource-dev.yaml,project-dev.yaml
+        refreshable-dataids: datasource-dev.yaml,redisource-dev.yaml,project-dev.yaml
+
+mybatis:
+  mapper-locations:
+    - classpath:com/pyyh/manager/business/**/*.xml

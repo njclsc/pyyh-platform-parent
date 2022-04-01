@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pyyh.manager.business.atomizer.dao.IOrganizationManagerDao">
+
+	<insert id="add" parameterType = "com.pyyh.manager.business.atomizer.pojo.OrganizationPojo" useGeneratedKeys = "true" keyProperty = "id">
+		insert into tb_organization(organizationName, organizationCode, creator, creatorOrganizationCode) values(
+			#{organizationName}, #{organizationCode}, #{creator}, #{creatorOrganizationCode}
+		)
+	</insert>
+	<select id="exists" parameterType = "com.pyyh.manager.business.atomizer.pojo.OrganizationPojo" resultType = "Integer">
+		select exists(select 1 from tb_organization where organizationCode = #{organizationCode})
+	</select>
+	<update id="update" parameterType = "com.pyyh.manager.business.atomizer.pojo.OrganizationPojo">
+		update tb_organization set organizationName = #{organizationName} where id = ${id}
+	</update>
+	<delete id="delete" parameterType = "com.pyyh.manager.business.atomizer.pojo.OrganizationPojo">
+		delete from tb_organization where id = ${id}
+	</delete>
+	<select id="find" parameterType = "com.pyyh.manager.business.atomizer.pojo.OrganizationPojo" resultType = "com.pyyh.manager.business.atomizer.pojo.OrganizationPojo">
+		select * from tb_organization where 1 = 1
+		<if test="id != null and id != ''">
+			and id = ${id}
+		</if>
+		<if test="organizationName != null and organizationName != ''">
+			and organizationName = #{organizationName}
+		</if>
+		<if test="organizationCode != null and organizationCode != ''">
+			and organizationCode = #{organizationCode}
+		</if>
+		<if test="creator != null and creator != ''">
+			and creator = #{creator}
+		</if>
+		<if test="creatorOrganizationCode != null and creatorOrganizationCode != ''">
+			and creatorOrganizationCode = #{creatorOrganizationCode}
+		</if>
+		<if test="rows != null and rows != ''">
+			limit ${begin}, ${rows}
+		</if>
+	</select>
+	<select id="count" parameterType = "com.pyyh.manager.business.atomizer.pojo.OrganizationPojo" resultType = "Integer">
+		select count(*) from tb_organization where 1 = 1
+		<if test="id != null and id != ''">
+			and id = ${id}
+		</if>
+		<if test="organizationName != null and organizationName != ''">
+			and organizationName = #{organizationName}
+		</if>
+		<if test="organizationCode != null and organizationCode != ''">
+			and organizationCode = #{organizationCode}
+		</if>
+		<if test="creator != null and creator != ''">
+			and creator = #{creator}
+		</if>
+		<if test="creatorOrganizationCode != null and creatorOrganizationCode != ''">
+			and creatorOrganizationCode = #{creatorOrganizationCode}
+		</if>
+	</select>
+</mapper>

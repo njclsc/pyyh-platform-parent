@@ -115,5 +115,6 @@
 	</dependencyManagement>
 	<modules>
 		<module>pyyh-platform-modular-login</module>
+		<module>pyyh-platform-modular-manager</module>
 	</modules>
 </project>
