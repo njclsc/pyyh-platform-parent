@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pyyh.manager.business.atomizer.dao.IRoleActionDao">
+
+	<insert id="add" parameterType = "com.pyyh.manager.business.atomizer.pojo.RoleActionPojo">
+		insert into tb_role_action(roleIndex, actionIndex) values
+		<foreach collection="actionIndexes" item = "item" separator = ",">
+			(${roleIndex}, ${item})
+		</foreach>
+	</insert>
+	<delete id="delete" parameterType = "com.pyyh.manager.business.atomizer.pojo.RoleActionPojo">
+		delete from tb_role_action where roleIndex = ${roleIndex}
+	</delete>
+</mapper>
