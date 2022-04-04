@@ -1,5 +1,7 @@
 package com.pyyh.login.business.atomizer.pojo;
 
+import java.util.List;
+
 public class UserPojo {
 	private int id;
 	private String account;
@@ -14,6 +16,7 @@ public class UserPojo {
 	private String creatorOrganizationCode;
 	private String lastLoginTime;
 	private boolean login;
+	private List<Integer> jurisdiction;
 	public boolean isLogin() {
 		return login;
 	}
@@ -25,6 +28,12 @@ public class UserPojo {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public List<Integer> getJurisdiction() {
+		return jurisdiction;
+	}
+	public void setJurisdiction(List<Integer> jurisdiction) {
+		this.jurisdiction = jurisdiction;
 	}
 	public String getAccount() {
 		return account;

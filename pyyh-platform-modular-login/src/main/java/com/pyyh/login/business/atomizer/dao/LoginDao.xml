@@ -2,7 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.pyyh.login.business.atomizer.dao.ILoginDao">
-	<select id="findUser" parameterType = "com.pyyh.login.business.atomizer.pojo.UserPojo" resultType = "com.pyyh.login.business.atomizer.pojo.UserPojo">
-		select * from tb_user where account = #{account} and organizationCode = #{organizationCode}
+	<select id="findUser" parameterType="com.pyyh.login.business.atomizer.pojo.UserPojo"
+		resultType="com.pyyh.login.business.atomizer.pojo.UserPojo">
+		select * from tb_user where account = #{account} and
+		organizationCode = #{organizationCode}
+	</select>
+	<select id="findJurisdiction" parameterType="com.pyyh.login.business.atomizer.pojo.UserPojo" resultType="Integer">
+		SELECT tb_action.id FROM tb_user
+			LEFT JOIN tb_user_role ON tb_user.id = tb_user_role.userIndex
+			LEFT JOIN tb_role_action ON tb_user_role.roleIndex = tb_role_action.roleIndex
+			LEFT JOIN tb_action ON tb_role_action.actionIndex = tb_action.id
+		WHERE tb_user.account = #{account} AND tb_user.organizationCode = #{organizationCode}
 	</select>
 </mapper>

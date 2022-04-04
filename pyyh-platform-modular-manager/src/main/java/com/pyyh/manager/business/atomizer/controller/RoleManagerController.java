@@ -22,15 +22,15 @@ public class RoleManagerController {
 		return roleService.add(rolePojo, request);
 	}
 	@RequestMapping("delete")
-	public String delete(@RequestBody RolePojo rolePojo){
+	public String delete(@RequestBody RolePojo rolePojo, HttpServletRequest request){
 		return roleService.delete(rolePojo);
 	}
 	@RequestMapping("update")
-	public String update(@RequestBody RolePojo rolePojo){
+	public String update(@RequestBody RolePojo rolePojo, HttpServletRequest request){
 		return roleService.update(rolePojo);
 	}
 	@RequestMapping("find")
-	public String find(@RequestBody RolePojo rolePojo){
+	public String find(@RequestBody RolePojo rolePojo, HttpServletRequest request){
 		return roleService.find(rolePojo);
 	}
 }

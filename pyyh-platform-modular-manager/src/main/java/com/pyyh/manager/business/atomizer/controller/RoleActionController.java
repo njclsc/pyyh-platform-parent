@@ -1,5 +1,7 @@
 package com.pyyh.manager.business.atomizer.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,11 +18,11 @@ public class RoleActionController {
 	@Qualifier("RoleActionServiceImp")
 	private IRoleActionService raService;
 	@RequestMapping("add")
-	public String add(@RequestBody RoleActionPojo rap){
+	public String add(@RequestBody RoleActionPojo rap, HttpServletRequest request){
 		return raService.add(rap);
 	}
 	@RequestMapping("delete")
-	public String delete(@RequestBody RoleActionPojo rap){
+	public String delete(@RequestBody RoleActionPojo rap, HttpServletRequest request){
 		return raService.delete(rap);
 	}
 	

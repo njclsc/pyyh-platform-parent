@@ -22,15 +22,15 @@ public class OrganizationManagerController {
 		return orgService.add(organizationPojo, request);
 	}
 	@RequestMapping("update")
-	public String update(@RequestBody OrganizationPojo organizationPojo){
+	public String update(@RequestBody OrganizationPojo organizationPojo, HttpServletRequest request){
 		return orgService.update(organizationPojo);
 	}
 	@RequestMapping("delete")
-	public String delete(@RequestBody OrganizationPojo organizationPojo){
+	public String delete(@RequestBody OrganizationPojo organizationPojo, HttpServletRequest request){
 		return orgService.delete(organizationPojo);
 	}
 	@RequestMapping("find")
-	public String find(@RequestBody OrganizationPojo organizationPojo){
+	public String find(@RequestBody OrganizationPojo organizationPojo, HttpServletRequest request){
 		return orgService.find(organizationPojo);
 	}
 }

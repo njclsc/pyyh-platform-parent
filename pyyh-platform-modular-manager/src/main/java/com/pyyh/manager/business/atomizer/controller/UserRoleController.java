@@ -1,5 +1,7 @@
 package com.pyyh.manager.business.atomizer.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,11 +18,11 @@ public class UserRoleController {
 	@Qualifier("UserRoleServiceImp")
 	private IUserRoleService urService;
 	@RequestMapping("add")
-	public String add(@RequestBody UserRolePojo urp){
+	public String add(@RequestBody UserRolePojo urp, HttpServletRequest request){
 		return urService.add(urp);
 	}
 	@RequestMapping("delete")
-	public String delete(@RequestBody UserRolePojo urp){
+	public String delete(@RequestBody UserRolePojo urp, HttpServletRequest request){
 		return urService.delete(urp);
 	}
 }

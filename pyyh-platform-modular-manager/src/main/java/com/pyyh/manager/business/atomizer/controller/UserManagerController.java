@@ -22,15 +22,15 @@ public class UserManagerController {
 		return userService.add(user, request);
 	}
 	@RequestMapping("delete")
-	public String delete(@RequestBody UserPojo user){
+	public String delete(@RequestBody UserPojo user, HttpServletRequest request){
 		return userService.delete(user);
 	}
 	@RequestMapping("update")
-	public String update(@RequestBody UserPojo user){
+	public String update(@RequestBody UserPojo user, HttpServletRequest request){
 		return userService.update(user);
 	}
 	@RequestMapping("find")
-	public String find(@RequestBody UserPojo user){
+	public String find(@RequestBody UserPojo user, HttpServletRequest request){
 		return userService.find(user);
 	}
 }

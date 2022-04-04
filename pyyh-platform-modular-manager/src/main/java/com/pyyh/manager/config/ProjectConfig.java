@@ -1,9 +1,12 @@
 package com.pyyh.manager.config;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +15,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
+import com.pyyh.manager.business.atomizer.dao.IActionDao;
+import com.pyyh.manager.business.atomizer.pojo.ActionPojo;
 import com.pyyh.manager.business.atomizer.pojo.UserPojo;
 
 @Configuration
@@ -59,7 +64,19 @@ public class ProjectConfig {
 		ProjectConfig.setJWT_EXPIRES(expires);
 		return null;
 	}
-
+	@Bean(name = "actions")
+	public HashMap<String, Integer> loadBaseData(@Autowired IActionDao aDao){
+		List<ActionPojo> aps = aDao.find(null);
+		HashMap<String, Integer> actions = new HashMap<String, Integer>();
+		for(ActionPojo ap : aps){
+			String key = ap.getActionUrl();
+			Integer index = ap.getId();
+			if(!actions.containsKey(key)){
+				actions.put(key, index);
+			}
+		}
+		return actions;
+	}
 	public static String getJWT_ALG() {
 		return JWT_ALG;
 	}

@@ -1,5 +1,7 @@
 package com.pyyh.login.business.atomizer.serviceimp;
 
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
@@ -44,8 +46,11 @@ public class LoginServiceImp implements ILoginService{
 			UserPojo _userPojo = loginDao.findUser(userPojo);
 			_userPojo.setLogin(true);
 			_userPojo.setPassword("");
+			List<Integer> actions = loginDao.findJurisdiction(_userPojo);
+			_userPojo.setJurisdiction(actions);
 			jedis.set(key, JSONObject.toJSONString(_userPojo));
 			jedis.pexpire(key, ProjectConfig.getJWT_EXPIRES());
+			System.out.println(JSONObject.toJSONString(_userPojo));
 			return JSONObject.toJSONString(ContainerUtil.response("/login/login/check", "登录成功", "success", jwtToken, null));
 		}catch(UnknownAccountException e){
 			return JSONObject.toJSONString(ContainerUtil.response("/login/login/check", "账号不存在", "fail", null, null));
