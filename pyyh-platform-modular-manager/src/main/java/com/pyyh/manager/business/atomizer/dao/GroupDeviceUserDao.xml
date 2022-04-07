@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pyyh.manager.business.atomizer.dao.IGroupDeviceUserDao">
+
+	<insert id="groupDeviceAdd" parameterType = "com.pyyh.manager.business.atomizer.pojo.GroupDeviceUserPojo">
+		insert into tb_group_device(groupIndex, deviceIndex) values
+		<foreach collection="deviceIndexes" item = "item" separator = ",">
+			(${groupIndex}, ${item})
+		</foreach>
+	</insert>
+	<delete id="groupDeviceDelete" parameterType = "com.pyyh.manager.business.atomizer.pojo.GroupDeviceUserPojo">
+		delete from tb_group_device where groupIndex = ${groupIndex}
+	</delete>
+	<select id="groupDeviceFind" parameterType = "com.pyyh.manager.business.atomizer.pojo.GroupDeviceUserPojo" resultType = "com.pyyh.manager.business.atomizer.pojo.DevicePojo">
+		SELECT * FROM tb_device WHERE id IN (
+			SELECT deviceIndex FROM tb_group_device WHERE groupIndex = ${groupIndex}
+		)
+		<if test="rows != null and rows != ''">
+			limit ${begin}, ${rows}
+		</if>
+	</select>
+	<select id="groupDeviceCount" parameterType = "com.pyyh.manager.business.atomizer.pojo.GroupDeviceUserPojo" resultType = "Integer">
+		SELECT count(*) FROM tb_device WHERE id IN (
+			SELECT deviceIndex FROM tb_group_device WHERE groupIndex = ${groupIndex}
+		)
+	</select>
+	<insert id="userGroupAdd" parameterType = "com.pyyh.manager.business.atomizer.pojo.GroupDeviceUserPojo">
+		insert into tb_user_group(userIndex, groupIndex) values
+		<foreach collection="groupIndexes" item = "item" separator = ",">
+			(${userIndex}, ${item})
+		</foreach>
+	</insert>
+	<delete id="userGroupDelete" parameterType = "com.pyyh.manager.business.atomizer.pojo.GroupDeviceUserPojo">
+		delete from tb_user_group where userIndex = ${userIndex}
+	</delete>
+	<select id="userGroupFind" parameterType = "com.pyyh.manager.business.atomizer.pojo.GroupDeviceUserPojo" resultType = "com.pyyh.manager.business.atomizer.pojo.GroupPojo">
+		SELECT * FROM tb_group WHERE id IN (
+			SELECT groupIndex FROM tb_user_group WHERE userIndex = ${userIndex}
+		)
+		<if test="rows != null and rows != ''">
+			limit ${begin}, ${rows}
+		</if>
+	</select>
+	<select id="userGroupCount" parameterType = "com.pyyh.manager.business.atomizer.pojo.GroupDeviceUserPojo" resultType = "Integer">
+		SELECT count(*) FROM tb_group WHERE id IN (
+			SELECT groupIndex FROM tb_user_group WHERE userIndex = ${userIndex}
+		)
+	</select>
+</mapper>

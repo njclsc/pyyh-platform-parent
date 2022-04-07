@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pyyh.manager.business.atomizer.dao.IGroupManagerDao">
+	
+	<insert id="add" parameterType = "com.pyyh.manager.business.atomizer.pojo.GroupPojo" useGeneratedKeys="true" keyProperty="id">
+		insert into tb_group(groupName, creator, creatorOrganizationCode) values(
+			#{groupName}, #{creator}, #{creatorOrganizationCode}
+		)
+	</insert>
+	<select id="exists" parameterType = "com.pyyh.manager.business.atomizer.pojo.GroupPojo" resultType = "Integer">
+		select exists(select 1 from tb_group where groupName = #{groupName} and creatorOrganizationCode = #{creatorOrganizationCode})
+	</select>
+	<delete id="delete" parameterType = "com.pyyh.manager.business.atomizer.pojo.GroupPojo">
+		delete from tb_group where id = ${id}
+	</delete>
+	<update id="update" parameterType = "com.pyyh.manager.business.atomizer.pojo.GroupPojo">
+		update tb_group set groupName = #{groupName} where id = ${id}
+	</update>
+	<select id="find" parameterType = "com.pyyh.manager.business.atomizer.pojo.GroupPojo" resultType = "com.pyyh.manager.business.atomizer.pojo.GroupPojo">
+		select * from tb_group where 1 = 1
+		<if test="id != null and id != ''">
+			and id = ${id}
+		</if>
+		<if test="groupName != null and groupName != ''">
+			and groupName = #{groupName}
+		</if>
+		<if test="creator != null and creator != ''">
+			and creator = #{creator}
+		</if>
+		<if test="creatorOrganizationCode != null and creatorOrganizationCode != ''">
+			and creatorOrganizationCode = #{creatorOrganizationCode}
+		</if>
+		<if test="rows != null and rows != ''">
+			limit ${begin}, ${rows}
+		</if>
+	</select>
+	<select id="count" parameterType = "com.pyyh.manager.business.atomizer.pojo.GroupPojo" resultType = "Integer">
+		select count(*) from tb_group where 1 = 1
+		<if test="id != null and id != ''">
+			and id = ${id}
+		</if>
+		<if test="groupName != null and groupName != ''">
+			and groupName = #{groupName}
+		</if>
+		<if test="creator != null and creator != ''">
+			and creator = #{creator}
+		</if>
+		<if test="creatorOrganizationCode != null and creatorOrganizationCode != ''">
+			and creatorOrganizationCode = #{creatorOrganizationCode}
+		</if>
+	</select>
+</mapper>

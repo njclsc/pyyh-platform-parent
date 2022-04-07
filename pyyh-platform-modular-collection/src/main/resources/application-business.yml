@@ -1,0 +1,20 @@
+#--------------业务配置----------------------------
+business:
+  tcpServer: 
+    allKeys: test1,notest2,notest3
+    usedKey: test1
+  udp: 
+    allKeys: udpTest1,noudpTest2,noudpTest3,business_renwei
+    usedKey: business_renwei
+  http:
+    allKeys: http1,nohttp2,nohttp3
+    usedKey: nohttp3
+#--------------线程池-----------------------------
+data: 
+  threadPool: 
+    corePoolSize: 50
+    maximumPoolSize: 250
+    keepAliveTim: 10000
+#--------------使用服务-----------------------------
+redis:
+  used: false

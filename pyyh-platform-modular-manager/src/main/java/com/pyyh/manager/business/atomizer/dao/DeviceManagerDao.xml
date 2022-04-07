@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pyyh.manager.business.atomizer.dao.IDeviceManagerDao">
+
+	<insert id="add" parameterType="com.pyyh.manager.business.atomizer.pojo.DevicePojo" useGeneratedKeys="true" keyProperty="id">
+		insert into tb_device(deviceCode,
+		organizationCode, rate, grar) values(
+		#{deviceCode}, #{organizationCode}, #{rate}, #{grar}
+		)
+	</insert>
+	<select id="exists" parameterType="com.pyyh.manager.business.atomizer.pojo.DevicePojo"
+		resultType="Integer">
+		select exists(select 1 from tb_device where deviceCode =
+		#{deviceCode} and organizationCode = #{organizationCode})
+	</select>
+	<delete id="delete" parameterType="com.pyyh.manager.business.atomizer.pojo.DevicePojo">
+		delete from tb_device where
+		deviceCode = #{deviceCode} and organizationCode = #{organizationCode}
+	</delete>
+	<update id="update" parameterType="com.pyyh.manager.business.atomizer.pojo.DevicePojo">
+		update tb_device set startTime
+		= #{startTime}, sotpTime = #{sotpTime}, runTime = #{runTime},
+		rate = #{rate}, grar = #{grar}, level = #{grar} where deviceCode =
+		#{deviceCode} and organizationCode = #{organizationCode}
+	</update>
+	<select id="find" parameterType="com.pyyh.manager.business.atomizer.pojo.DevicePojo" resultType="com.pyyh.manager.business.atomizer.pojo.DevicePojo">
+		select * from tb_device where 1 = 1
+		<if test="deviceCode != null and deviceCode != ''">
+			and deviceCoe = #{deviceCoe}
+		</if>
+		<if test="organizationCode != null and organizationCode != ''">
+			and organizationCode = #{organizationCode}
+		</if>
+		<if test="rate != null and rate != ''">
+			and rate = #{rate}
+		</if>
+		<if test="grar != null and grar != ''">
+			and grar = #{grar}
+		</if>
+		<if test="status != null and status != ''">
+			and status = ${status}
+		</if>
+		<if test="rows != null and rows != ''">
+			limit ${begin}, ${rows}
+		</if>
+	</select>
+	<select id="count" parameterType="com.pyyh.manager.business.atomizer.pojo.DevicePojo" resultType="Integer">
+		select count(*) from tb_device where 1 = 1
+		<if test="deviceCode != null and deviceCode != ''">
+			and deviceCoe = #{deviceCoe}
+		</if>
+		<if test="organizationCode != null and organizationCode != ''">
+			and organizationCode = #{organizationCode}
+		</if>
+		<if test="rate != null and rate != ''">
+			and rate = #{rate}
+		</if>
+		<if test="grar != null and grar != ''">
+			and grar = #{grar}
+		</if>
+		<if test="status != null and status != ''">
+			and status = ${status}
+		</if>
+	</select>
+</mapper>

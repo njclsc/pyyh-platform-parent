@@ -121,5 +121,6 @@
 	<modules>
 		<module>pyyh-platform-modular-login</module>
 		<module>pyyh-platform-modular-manager</module>
+		<module>pyyh-platform-modular-collection</module>
 	</modules>
 </project>

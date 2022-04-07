@@ -6,7 +6,7 @@
 		<artifactId>pyyh-platform-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>pyyh-platform-modular-manager</artifactId>
+	<artifactId>pyyh-platform-modular-collection</artifactId>
 	<build>
 		<plugins>
 			<plugin>
@@ -14,15 +14,6 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<resources>
-			<resource>
-				<directory>src/main/java</directory>
-				<includes>
-					<include>**/*.xml</include>
-				</includes>
-				<filtering>false</filtering>
-			</resource>
-		</resources>
 	</build>
 
 	<dependencies>
